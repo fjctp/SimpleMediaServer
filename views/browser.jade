@@ -1,0 +1,12 @@
+//- From node:
+//- pageData.title: Sample Title
+//- pageData.files: {file: link, xxxx}
+//-
+extends ./layout.jade
+
+block content
+    h1 #{pageData.title}
+    ul
+        each link, file in pageData.files
+            li #[a(href=link) #{file}]
+    br

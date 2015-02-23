@@ -1,0 +1,16 @@
+//- From node:
+//- pageData.title: Sample Title
+//- pageData.previous_page: previous page url
+//- 
+doctype html
+html
+    head
+        block title
+            title #{pageData.title}
+    body
+        block content
+        
+        block go_back
+            br
+            br
+            a(href=pageData.previous_page) back

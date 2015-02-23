@@ -1,0 +1,20 @@
+{
+  "name": "StreamServer",
+  "version": "0.0.1",
+  "description": "Given an IP address, port, and home folder, this app creates a streaming server that provide file browsing and streaming ability",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "stream",
+    "server",
+    "html"
+  ],
+  "author": "fjctp",
+  "license": "GNU GPL 2.0",
+  "repository" :
+  { "type" : "git"
+  , "url" : "https://github.com/fjctp/SimpleMediaServer.git"
+  }
+}
