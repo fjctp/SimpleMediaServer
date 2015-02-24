@@ -34,7 +34,7 @@ function writeResponse (parsed_request, response) {
         var jade_options = {
             pageData: {
                 'title': 'File Broswer',
-                'previous_page': 'test',
+                'previous_page': '',
                 'files': files_list,
             }
         };

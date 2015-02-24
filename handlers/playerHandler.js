@@ -1,4 +1,4 @@
-"strict mode"
+"strict mode";
 
 var path = require('path');
 var jade = require('jade');
@@ -8,24 +8,25 @@ var htmlHandler = require('../utils/htmlHandler');
 function writeResponse (parsed_request, response) {
     // get the file path with different video format
     var ext = path.extname(parsed_request.get_path);
+    var mp4, ogg, webm = ['', '', ''];
     switch (ext) {
         case '.mp4':
-            var mp4 = parsed_request.get_path;
-            var ogg = parsed_request.get_path.replace(ext, '.ogg');
-            var webm = parsed_request.get_path.replace(ext, '.webm');
+            mp4 = parsed_request.get_path;
+            //ogg = parsed_request.get_path.replace(ext, '.ogg');
+            //webm = parsed_request.get_path.replace(ext, '.webm');
             break;
         case '.ogg':
-            var mp4 = parsed_request.get_path.replace(ext, '.mp4');
-            var ogg = parsed_request.get_path;
-            var webm = parsed_request.get_path.replace(ext, '.webm');
+            //mp4 = parsed_request.get_path.replace(ext, '.mp4');
+            ogg = parsed_request.get_path;
+            //webm = parsed_request.get_path.replace(ext, '.webm');
             break;
         case '.webm':
-            var mp4 = parsed_request.get_path.replace(ext, '.mp4');
-            var ogg = parsed_request.get_path.replace(ext, '.ogg');
-            var webm = parsed_request.get_path;
+            //mp4 = parsed_request.get_path.replace(ext, '.mp4');
+            //ogg = parsed_request.get_path.replace(ext, '.ogg');
+            webm = parsed_request.get_path;
             break;
         default:
-            throw "In playerHandler.js, Unhandled extension";
+            throw "In playerHandler.js, unhandled video extension, " + ext;
     }
     
     // Get the parameters for jade.render ready
@@ -37,7 +38,7 @@ function writeResponse (parsed_request, response) {
     var jade_options = {
         pageData: {
             'title': 'File Broswer',
-            'previous_page': 'test',
+            'previous_page': '',
             'mp4': mp4,
             'ogg': ogg,
             'webm': webm,

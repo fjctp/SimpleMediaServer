@@ -7,10 +7,15 @@ html
     head
         block title
             title #{pageData.title}
+            script(type='text/javascript').
+                function go_back() {
+                    window.history.back();
+                }
     body
         block content
         
-        block go_back
+        block bottom
             br
             br
-            a(href=pageData.previous_page) back
+            a(href='browser?get=' + pageData.previous_page) back
+            //a(href=javascript:go_back()) back

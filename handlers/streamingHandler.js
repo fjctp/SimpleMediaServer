@@ -6,19 +6,20 @@ var include = require('../include');
 
 function writeResponse (parsed_request, response) {
     var video_path = path.join(parsed_request.home_dir, parsed_request.get_path);
-    fs.stat(video_path, function (err, stats) {
-        if(err)
-            throw 'Cannot open file: ' + video_path;
-            
+    // check if the video exist, if not, return error 404
+    if (fs.existsSync(video_path)) {
         // get parameters for the video
+        var stats = fs.statSync(video_path)
         var videoTotalSize = stats.size;
         var videoStart = parsed_request.start === undefined ?
             0 : parsed_request.start;
         var videoEnd = parsed_request.end === undefined ?
             videoTotalSize-1 : parsed_request.end;
         var videoChunkSize = videoEnd - videoStart + 1;
-        var MIMEType = 'video/mp4';
-        
+
+        var extname = path.extname(parsed_request.get_path).replace('.', '');
+        var MIMEType = 'video/' + extname;
+
         // write http header
         http_header = {
             "Accept-Ranges": "bytes",
@@ -27,7 +28,7 @@ function writeResponse (parsed_request, response) {
             "Content-Length": videoChunkSize,
         };
         response.writeHead(include.http.status_codes.PARTIAL_CONTENT, http_header);
-        
+
         // open a read stream for the video
         var video = fs.createReadStream(
             video_path, {
@@ -35,7 +36,7 @@ function writeResponse (parsed_request, response) {
                 end: parseInt(videoEnd),
             }
         );
-        
+
         // transmit data using event
         video.on('data', function(chunk) {
             response.write(chunk);
@@ -43,8 +44,12 @@ function writeResponse (parsed_request, response) {
         video.on('end', function(chunk) {
             response.end(chunk);
         });
-    });
-    
+    }
+    else {
+        http_header = {};
+        response.writeHead(include.http.status_codes.ERROR, http_header)
+        response.end();
+    }
 }
 
 module.exports = writeResponse;

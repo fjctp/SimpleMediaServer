@@ -1,4 +1,4 @@
-"strict mode"
+ "strict mode"
 
 var path = require('path');
 var jade = require('jade');
@@ -9,15 +9,16 @@ function writeResponse (parsed_request, response) {
     var html_path = path.join(
         include.path.ROOT,
         include.path.JADE_FOLDER,
-        'error.jade');
+        'error.jade'
+    );
     var jade_options = {
         pageData: {
             'title': 'Error!!!',
-            'previous_page': 'test',
+            'previous_page': '',
         }
     };
     // render jade template, and get the html content
-    var html_content = jade.renderFile(html_path, jade_options)
+    var html_content = jade.renderFile(html_path, jade_options);
     // write the html_content to the response
     htmlHandler(html_content, response);
 };
