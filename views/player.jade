@@ -8,7 +8,7 @@ extends ./layout.jade
 
 block content
     body
-        video(width="800",controls)
+        video(width="860", height="540", controls, autoplay)
             source(src='/streaming?get=' + pageData.mp4, type="video/mp4")
             source(src='/streaming?get=' + pageData.ogg, type="video/ogg")
             source(src='/streaming?get=' + pageData.webm, type="video/webm")

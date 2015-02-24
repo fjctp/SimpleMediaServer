@@ -21,12 +21,7 @@ router.prototype.getHandler = function (parsed_req) {
     // validate the request, and return a handler for that request
     var key = parsed_req.method + parsed_req.pathname;
     
-    if (parsed_req.pathname == '/favicon.ico') {
-        // do nothing
-        //return function (parsed_request, response) {};
-        return this.handlers[include.http.status_codes.ERROR];
-    }
-    else if(this.handlers[key] === undefined || parsed_req.get_path === undefined) {
+    if (this.handlers[key] === undefined || parsed_req.get_path === undefined) {
         return this.handlers[include.http.status_codes.ERROR];
     }
     else {

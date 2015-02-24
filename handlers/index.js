@@ -23,6 +23,5 @@ function getHandlers (path_to_handlers_folder) {
     else
     {
         throw 'folder does not exist: ' + path_to_handlers_folder;
-        return null;
     }
 }

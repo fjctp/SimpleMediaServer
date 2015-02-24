@@ -64,11 +64,13 @@ StreamServer.prototype.onRequest = function (request, response) {
     handler(parsed_request, response);
 };
 
-// when the server starts, get an instance of router
-// and add the handler
+// when the server starts
+// get an instance of router and add handlers
 StreamServer.prototype.onServerStart = function () {
     this.router = new router();
     this.router.addErrorHandler(handlers.error);
+    this.router.addHandler('GET', '/favicon.ico', handlers.eror);
+    //this.router.addHandler('GET', '/home', handlers.home);
     this.router.addHandler('GET', '/browser', handlers.browser);
     this.router.addHandler('GET', '/player', handlers.player);
     this.router.addHandler('GET', '/streaming', handlers.streaming);
