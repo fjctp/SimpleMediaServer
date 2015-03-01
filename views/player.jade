@@ -6,11 +6,29 @@
 //-
 extends ./layout.jade
 
+block script
+    
 block content
-    body
-        video(width="860", height="540", controls, autoplay)
+    div(width="860", tabindex="1", onkeydown="keypress()")
+        video(id="video", width="860", height="540", controls)
             source(src='/streaming?get=' + pageData.mp4, type="video/mp4")
             source(src='/streaming?get=' + pageData.ogg, type="video/ogg")
             source(src='/streaming?get=' + pageData.webm, type="video/webm")
+            track(src='/streaming?get='  + pageData.sub, kind="subtitles", srclang="en", label="English")
             Your browser does not support HTML5 video.
         br
+    
+    script.
+        function keypress (event) {
+            event = event || window.event; // get the event (for compatibility)
+            if (event.which == 32) {
+                // if it is a space, 
+                //    if paused, plays the video
+                //    if not, pauses the video
+                var isPaused = document.getElementById("video").paused; 
+                if (isPaused)
+                    document.getElementById("video").play();
+                else
+                    document.getElementById("video").pause();
+            }
+        }

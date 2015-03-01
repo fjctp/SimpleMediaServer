@@ -12,20 +12,23 @@ function writeResponse (parsed_request, response) {
         parsed_request.get_path
     );
     fs.readdir(folder_path, function (err, files) {
+        if (err)
+            throw err;
         var files_list = {};
         files.forEach(function (file) {
             // for each file in the folder if it is a directory or video
             // add it to the list, { file: url }
             var stats = fs.statSync(path.join(folder_path, file));
-            var path_to_file = path.join(parsed_request.get_path, file)
+            if (err)
+                throw err;
+            var get_path = path.join(parsed_request.get_path, file)
             if (stats.isDirectory())
                 // it is a directory, open browser
-                files_list[file] = 'browser?get=' + path_to_file;
+                files_list[file] = 'browser?get=' + get_path;
             else if (path.extname(file) in include.video_type)
                 // it is a video, open player
-                files_list[file] = 'player?get=' + path_to_file;
+                files_list[file] = 'player?get=' + get_path;
         });
-        
         var html_path = path.join(
             include.path.ROOT,
             include.path.JADE_FOLDER,
@@ -33,7 +36,7 @@ function writeResponse (parsed_request, response) {
         );
         var jade_options = {
             pageData: {
-                'title': 'File Broswer',
+                'title': parsed_request.get_path,
                 'previous_page': '',
                 'files': files_list,
             }

@@ -8,7 +8,9 @@ var htmlHandler = require('../utils/htmlHandler');
 function writeResponse (parsed_request, response) {
     // get the file path with different video format
     var ext = path.extname(parsed_request.get_path);
-    var mp4, ogg, webm = ['', '', ''];
+    var mp4 = undefined;
+    var ogg = undefined;
+    var webm = undefined;
     switch (ext) {
         case '.mp4':
             mp4 = parsed_request.get_path;

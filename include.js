@@ -1,6 +1,6 @@
 "strict mode"
 
-// define constant
+// general parameters
 module.exports = {
     message : {
         type : {
