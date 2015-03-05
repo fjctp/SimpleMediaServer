@@ -1,12 +1,24 @@
 //- From node:
 //- pageData.title: Sample Title
-//- pageData.files: {file: link, xxxx}
+//- pageData.files: {file: link, ...}
+//- pageData.folders: {folder: link, ...}
 //-
 extends ./layout.jade
 
 block content
     h1 #{pageData.title}
-    ul
-        each link, file in pageData.files
-            li #[a(href=link) #{file}]
-    br
+    table(width="800")
+         tbody
+            // Header
+            tr(style="text-align:left; vertical-align:top;")
+                th(style="width:40%;") Folders
+                th(style="width:60%;") Videos
+
+            // Data rows
+            tr(style="text-align:left; vertical-align:top;")
+                td #[ul] 
+                    each link, folder in pageData.folders
+                        li #[a(href=link) #{folder}]
+                td #[ul]
+                    each link, file in pageData.files
+                        li #[a(href=link) #{file}]
