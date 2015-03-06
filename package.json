@@ -14,7 +14,12 @@
   "author": "fjctp",
   "license": "GNU GPL 2.0",
   "repository" :
-  { "type" : "git"
-  , "url" : "https://github.com/fjctp/SimpleMediaServer.git"
+  { "type" : "git",
+    "url" : "https://github.com/fjctp/SimpleMediaServer.git"
+  },
+  "dependencies" :
+  {
+    "jade" : "~1.9.2",
+    "monitor" : "~0.6.10"
   }
 }
