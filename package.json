@@ -1,10 +1,11 @@
 {
-  "name": "StreamServer",
+  "name": "SimpleMediaServer",
   "version": "0.0.1",
   "description": "Given an IP address, port, and home folder, this app creates a streaming server that provide file browsing and streaming ability",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node startServer.js",
+    "test": "node startServer.js"
   },
   "keywords": [
     "stream",
